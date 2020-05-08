@@ -7,6 +7,11 @@
 
   <p><%= @dog.description %></p>
 
+  <p><%= @dog.likes.count %> <%= (@dog.likes.count == 1) ? 'Like' : 'Likes' %></p>
+  <% if user_signed_in? && @dog.user_id != current_user.id %>
+    <%= button_to 'Like', dog_likes_path(@dog), method: :post %>
+  <% end %>
+
   <% if user_signed_in? && @dog.user_id == current_user.id %>
     <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
     <br>
