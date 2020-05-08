@@ -7,4 +7,7 @@ class User < ApplicationRecord
   # Relationships
   has_many :dogs
   has_many :likes, dependent: :destroy
+
+  # Validations
+  validates :name, :email, :password, :password_confirmation, presence: true
 end

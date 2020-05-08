@@ -6,6 +6,9 @@ class Dog < ApplicationRecord
   # ActiveStorage
   has_many_attached :images
 
+  # Validations
+  validates :name, :user_id, presence: true
+
   # Default Pagination Rule (will_paginate)
   self.per_page = 5
 
