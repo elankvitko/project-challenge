@@ -1,5 +1,7 @@
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
+  # We need to restrict strangers from being able to edit other dogs
+  before_action :verify_owner, only: [:edit, :update, :destroy]
 
   # GET /dogs
   # GET /dogs.json
@@ -74,5 +76,10 @@ class DogsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def dog_params
       params.require(:dog).permit(:name, :description, images: [])
+    end
+
+    # Check that the current_user is the dog's owner
+    def verify_owner
+      redirect_to root_path unless current_user.id == @dog.user_id
     end
 end
