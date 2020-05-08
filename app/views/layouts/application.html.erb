@@ -14,15 +14,19 @@
   <body>
     <div id="layout">
       <header>
-        <h1><%= link_to 'Dog Profile Demo', root_path %></h1>
-        <div class="actions">
-          <% if current_user %>
-            <%= link_to 'Add your dog', new_dog_path %>
-            <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-          <% else %>
-            <%= link_to 'Sign in', new_user_session_path %>
-            <%= link_to 'Sign up', new_user_registration_path %>
-          <% end %>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+          <div class="container d-flex justify-content-between">
+            <%= link_to 'Dog Profile Demo', root_path, class: 'navbar-brand d-flex align-items-center' %>
+            <div class="nav-links">
+              <% if current_user %>
+                <%= link_to 'Add your dog', new_dog_path, class: 'navbar-brand' %>
+                <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'navbar-brand' %>
+              <% else %>
+                <%= link_to 'Sign in', new_user_session_path, class: 'navbar-brand' %>
+                <%= link_to 'Sign up', new_user_registration_path, class: 'navbar-brand' %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </header>
       <div id="main">
