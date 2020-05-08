@@ -6,6 +6,34 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Due to the new relationship between User and Dog, I updated the seed file
+users = [
+  {
+    name: 'Miranda',
+    email: 'miranda@miranda.com',
+    password: '123456',
+    password_confirmation: '123456'
+  },
+  {
+    name: 'Bobby',
+    email: 'bobby@bobby.com',
+    password: '123456',
+    password_confirmation: '123456'
+  },
+  {
+    name: 'Daniel',
+    email: 'daniel@daniel.com',
+    password: '123456',
+    password_confirmation: '123456'
+  },
+  {
+    name: 'Jessica',
+    email: 'jessica@jessica.com',
+    password: '123456',
+    password_confirmation: '123456'
+  }
+]
+
 dogs = [
   {
     name: 'Bowie',
@@ -49,8 +77,12 @@ dogs = [
   },
 ]
 
-dogs.each do |dog|
-  dog = Dog.find_or_create_by(name: dog[:name], description: dog[:description])
+# find_or_create_by! will error out when creating a user so I did it this way.
+# SQLite doesn't like the virtual attribute of password
+user_ids = users.map { | user | User.find_by(email: user[:email]).try(:id) || User.create!(user).id }
+
+dogs.each_with_index do | dog, idx |
+  dog = Dog.find_or_create_by(name: dog[:name], description: dog[:description], user_id: user_ids[idx % 4])
   directory_name = File.join(Rails.root, 'db', 'seed', "#{dog[:name].downcase}", "*")
 
   Dir.glob(directory_name).each do |filename|
