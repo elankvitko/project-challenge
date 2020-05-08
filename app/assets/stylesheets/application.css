@@ -24,6 +24,10 @@ img.dog-photo {
   max-width: 100%;
 }
 
+img.ad-photo {
+  max-width: 100%;
+}
+
 .sortable-container {
   text-align: center;
   margin-bottom: 20px;
