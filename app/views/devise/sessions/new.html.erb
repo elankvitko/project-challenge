@@ -1,0 +1,22 @@
+<style>
+  #layout {
+    background-color: #f5f5f5;
+  }
+</style>
+
+<div class="text-center">
+  <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), input_html: { class: 'form-signin' }) do |f| %>
+    <div class="form-inputs col-md-12">
+      <div class="hold-center">
+        <%= f.input :email, required: true, autofocus: true, placeholder: 'Email', label: false %>
+        <%= f.input :password, required: true, placeholder: 'Password', label: false %>
+        <div class="checkbox mb-3">
+          <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+        </div>
+        <%= f.button :submit, "Log in", class: 'btn btn-lg btn-primary btn-block' %>
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  <% end %>
+</div>
