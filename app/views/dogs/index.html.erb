@@ -1,3 +1,16 @@
+<h3>Sort by likes in the last:</h3>
+<form action="<%= dogs_path %>" method="get">
+  <select name="sort">
+    <option value="">-</option>
+    <option value="1_hours">1 Hour</option>
+    <option value="2_hours">2 Hours</option>
+    <option value="3_hours">3 Hours</option>
+    <option value="1_days">Day</option>
+    <option value="2_days">2 Days</option>
+  </select>
+  <input type="submit" value="Sort">
+</form>
+
 <%= render partial: 'thumbnail', collection: @dogs, as: :dog %>
 
 <%= will_paginate @dogs %>
