@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   # Relationships
   has_many :dogs
+  has_many :likes, dependent: :destroy
 end

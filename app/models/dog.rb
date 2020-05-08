@@ -1,6 +1,7 @@
 class Dog < ApplicationRecord
   # Relationships
   belongs_to :user
+  has_many :likes, dependent: :destroy
 
   # ActiveStorage
   has_many_attached :images
