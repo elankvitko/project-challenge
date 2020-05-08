@@ -1,6 +1,13 @@
-<a href="<%= url_for(dog) %>">
-  <article>
-    <h2 class="dog-name"><%= dog.name %></h2>
-    <%= image_tag url_for(dog.images.first), class: "dog-photo", alt: "Photo of #{dog.name}" %>
-  </article>
-</a>
+<% if dog %>
+  <%= image_tag url_for(dog.images.first), class: "dog-photo", alt: "Photo of #{dog.name}" %>
+  <div class="card-body">
+    <p class="card-text"><%= dog.name %></p>
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="btn-group">
+        <%= link_to 'View', dog_path(dog), class: 'btn btn-sm btn-outline-secondary' %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= image_tag('ad.jpg', class: "dog-photo", alt: "Photo of ad") %>
+<% end %>

@@ -1,21 +1,40 @@
-<h3>Sort by likes in the last:</h3>
-<form action="<%= dogs_path %>" method="get">
-  <select name="sort">
-    <option value="">-</option>
-    <option value="1_hours">1 Hour</option>
-    <option value="2_hours">2 Hours</option>
-    <option value="3_hours">3 Hours</option>
-    <option value="1_days">Day</option>
-    <option value="2_days">2 Days</option>
-  </select>
-  <input type="submit" value="Sort">
-</form>
+<div class="container">
+  <div class="row">
+    <div class="sortable-container col-md-12">
+      <p class="sort-title">Sort By Likes In The Last: </p>
+      <form class="sortable-select" action="<%= dogs_path %>" method="get">
+        <select name="sort">
+          <option value="">-</option>
+          <option value="1_hours">1 Hour</option>
+          <option value="2_hours">2 Hours</option>
+          <option value="3_hours">3 Hours</option>
+          <option value="1_days">Day</option>
+          <option value="2_days">2 Days</option>
+        </select>
+        <input type="submit" value="Sort" class="btn-sort btn btn-secondary">
+      </form>
+      <%= link_to 'Reset', dogs_path, class: 'reset-sort-btn btn btn-danger' %>
+    </div>
+  </div>
+</div>
 
-<% @dogs.each.with_index(1) do | dog, idx | %>
-  <%= render partial: 'thumbnail', locals: { dog: dog } %>
-  <% if idx % 2 == 0 %>
-    <%= image_tag('ad.jpg') %>
+<div class="container">
+  <% @dogs.in_groups_of(5, false).each do |group| %>
+    <div class="row">
+      <% group.each.with_index(1) do | dog, idx | %>
+        <%= render partial: 'card', locals: { dog: dog } %>
+        <% if idx % 2 == 0 %>
+          <%= render partial: 'card', locals: { dog: false } %>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
+</div>
 
-<%= will_paginate @dogs %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <%= will_paginate @dogs %>
+    </div>
+  </div>
+</div>
