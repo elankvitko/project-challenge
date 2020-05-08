@@ -1,4 +1,7 @@
 class Dog < ApplicationRecord
+  # Relationships
+  belongs_to :user
+
   # ActiveStorage
   has_many_attached :images
 
