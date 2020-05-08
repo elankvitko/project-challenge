@@ -6,7 +6,8 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.paginate(page: params[:page])
+    sort_by = params[:sort] ? params[:sort].split('_') : nil
+    @dogs = (sort_by.blank? ? Dog : Dog.order_by_likes_in_last(sort_by[0], sort_by[1])).paginate(page: params[:page])
   end
 
   # GET /dogs/1
