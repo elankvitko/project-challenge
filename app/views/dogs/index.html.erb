@@ -11,6 +11,11 @@
   <input type="submit" value="Sort">
 </form>
 
-<%= render partial: 'thumbnail', collection: @dogs, as: :dog %>
+<% @dogs.each.with_index(1) do | dog, idx | %>
+  <%= render partial: 'thumbnail', locals: { dog: dog } %>
+  <% if idx % 2 == 0 %>
+    <%= image_tag('ad.jpg') %>
+  <% end %>
+<% end %>
 
 <%= will_paginate @dogs %>
